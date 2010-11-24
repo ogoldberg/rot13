@@ -27,17 +27,17 @@ class Rot13 < Test::Unit::TestCase
     # To change this template use File | Settings | File Templates.\
     assert_equal "o", rot13("b")
   end
+
   def test_ascii
     a='b'
     assert_equal 98, a[0].ord()
     assert_equal 'B', 66.chr
   end
+
   def rot13(n)
-    case n
-      when 'a'
-        return 'n'
-      when 'b'
-        return 'o'
-    end
+    #chip brains ruby line
+    ascii_value=n[0]
+    ascii_value+=13
+    return ascii_value.chr
   end
 end
