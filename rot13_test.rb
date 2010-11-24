@@ -44,6 +44,12 @@ class Rot13 < Test::Unit::TestCase
     assert_equal 'A', rot13('N')
   end
 
+  def test_not_modified
+    my_letter = "a"
+    assert_equal "n", rot13(my_letter)
+    assert_equal "a", my_letter
+  end
+
   def test_ascii
     a='b'
     assert_equal 98, a[0].ord()
@@ -51,25 +57,11 @@ class Rot13 < Test::Unit::TestCase
     assert_equal "z", 122.chr
   end
 
-  def rot13(n)
-    #chip brains ruby line
-    ascii_value=n[0].ord()
-    #a=6
-    puts "before: " + ascii_value.to_s
-    if (ascii_value>=65 and ascii_value<=77)
-      ascii_value += 13
-    end
-    if (ascii_value>=78 and ascii_value<=90)
-      ascii_value -= 13
-    end
-    if (ascii_value>= 97 and ascii_value<=109)
-      ascii_value += 13
-    end
-    if (ascii_value>=110 and ascii_value<=122)
-      ascii_value -= 13
-    end
-    puts "after: " + ascii_value.to_s
+  def test_period
+    assert_equal ".", rot13(".")
+  end
 
-    return ascii_value.chr()
+  def rot13(n)
+    return n.tr "A-Za-z", "N-ZA-Mn-za-m";
   end
 end
